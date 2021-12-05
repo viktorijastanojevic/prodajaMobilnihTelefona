@@ -1,3 +1,36 @@
+<?php
+
+require 'dbbroker.php';
+require 'model/user.php';
+
+
+	session_start();
+	if(isset($_POST["register"])){ 
+		$email = $_POST["emailRegister"];
+		$password = $_POST["passRegister"];
+		$firstname= $_POST["firstname"];
+		$lastname= $_POST["lastname"];
+		
+		$user = new User(null,$firstname,$lastname,$email,$password);
+		$result=User::register($user,$conn);
+		if ($result){
+			echo("Success");
+			 
+			$_SESSION["currentUser"]= User::getIdByEmail($user,$conn);
+			header('Location: index.php');
+		}else{
+			echo '<script>alert("Neuspesna registracija")</script>';
+		}
+	}
+
+
+?>
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,40 +78,41 @@
 					</span>
 				</div>
 
-				<form class="login100-form validate-form">
-					<div class="wrap-input100 validate-input m-b-26" data-validate="Username is required">
+				<form class="login100-form validate-form" method="post">
+					<div class="wrap-input100 validate-input m-b-26" data-validate="First name is required">
 						<span class="label-input100">First name</span>
-						<input class="input100" type="text" name="firstname" placeholder="Enter first name">
+						<input class="input100" type="text" name="firstname" id="firstname"  placeholder="Enter first name">
 						<span class="focus-input100"></span>
 					</div>
 
                   
 
-                    <div class="wrap-input100 validate-input m-b-26" data-validate="Username is required">
+                    <div class="wrap-input100 validate-input m-b-26" data-validate="Last name is required">
 						<span class="label-input100">Last name</span>
-						<input class="input100" type="text" name="lastname" placeholder="Enter last name">
+						<input class="input100" type="text" name="lastname" id="lastname" placeholder="Enter last name">
 						<span class="focus-input100"></span>
 					</div>
 
                     <div class="wrap-input100 validate-input m-b-26" data-validate="Username is required">
 						<span class="label-input100">Email</span>
-						<input class="input100" type="email" name="email" placeholder="Enter email">
+						<input class="input100" type="email" name="emailRegister" placeholder="Enter email">
 						<span class="focus-input100"></span>
 					</div>
 
 
 					<div class="wrap-input100 validate-input m-b-18" data-validate = "Password is required">
 						<span class="label-input100">Password</span>
-						<input class="input100" type="password" name="pass" placeholder="Enter password">
+						<input class="input100" type="password" name="passRegister" placeholder="Enter password">
 						<span class="focus-input100"></span>
 					</div>
 
-				
+					<div class="flex-sb-m w-full p-b-30">
+						 <a href="ulogujSe.php"> I already have an account!</a>
+					</div>
+				<br>
 
 					<div class="container-login100-form-btn">
-						<button class="login100-form-btn">
-							Register
-						</button>
+						<button class="login100-form-btn" name="register">  	Register 		</button>
 					</div>
 				</form>
 			</div>

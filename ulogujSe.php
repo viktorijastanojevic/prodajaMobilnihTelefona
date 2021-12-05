@@ -5,8 +5,7 @@
 
 
 	session_start();
-	if(isset($_POST["login"])){
-		echo "AAA";
+	if(isset($_POST["login"])){ 
 		$email = $_POST["emailLogin"];
 		$password = $_POST["passLogin"];
 		$user = new User(null,null,null,$email,$password);
@@ -17,7 +16,7 @@
 			$_SESSION["currentUser"]=$row["id"];
 			header('Location: index.php');
 		}else{
-			echo("Failed");
+			echo '<script>alert("Netacni podaci")</script>';
 		}
 	}
 
@@ -87,10 +86,8 @@
 
 					<div class="flex-sb-m w-full p-b-30">
 						<div class="contact100-form-checkbox">
-							<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
-							<label class="label-checkbox100" for="ckb1">
-								Remember me
-							</label>
+							 <a href="registrujSe.php">Create account!</a>
+							 
 						</div>
 
 						 

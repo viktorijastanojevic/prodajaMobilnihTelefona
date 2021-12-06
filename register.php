@@ -1,26 +1,32 @@
 <?php
 
-	require 'dbbroker.php';
-	require 'model/user.php';
+require 'dbbroker.php';
+require 'model/user.php';
 
-
-	session_start();
-	if(isset($_POST["login"])){ 
-		$email = $_POST["emailLogin"];
-		$password = $_POST["passLogin"];
-		$user = new User(null,null,null,$email,$password);
-		$result=User::login($user,$conn);
-		if(mysqli_num_rows($result) > 0){
-			echo("Success");
-			$row = mysqli_fetch_assoc($result);
-			$_SESSION["currentUser"]=$row["id"];
-			header('Location: index.php');
+ 
+	if(isset($_POST["register"])){ 
+		$email = $_POST["emailRegister"];
+		$password = $_POST["passRegister"];
+		$firstname= $_POST["firstname"];
+		$lastname= $_POST["lastname"];
+		
+		$user = new User(null,$firstname,$lastname,$email,$password);
+		$result=User::register($user,$conn);
+		if ($result){
+			echo '<script>alert("Uspesno")</script>';
+			 
+			 
+			 
 		}else{
-			echo '<script>alert("Netacni podaci")</script>';
+			echo '<script>alert("Neuspesna registracija")</script>';
 		}
 	}
 
+
 ?>
+
+
+
 
 
 
@@ -65,36 +71,47 @@
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
-				<div class="login100-form-title" style="background-image: url(images/bg-01.jpg);">
+				<div class="login100-form-title" style="background-image: url(images/bg-02.jpg);">
 					<span class="login100-form-title-1">
-						Sign In
+						Register
 					</span>
 				</div>
 
 				<form class="login100-form validate-form" method="post">
-					<div class="wrap-input100 validate-input m-b-26" data-validate="Email is required">
-						<span class="label-input100">Email</span>
-						<input class="input100" type="email" name="emailLogin" id="emailLogin" placeholder="Enter email">
+					<div class="wrap-input100 validate-input m-b-26" data-validate="First name is required">
+						<span class="label-input100">First name</span>
+						<input class="input100" type="text" name="firstname" id="firstname"  placeholder="Enter first name">
 						<span class="focus-input100"></span>
 					</div>
 
+                  
+
+                    <div class="wrap-input100 validate-input m-b-26" data-validate="Last name is required">
+						<span class="label-input100">Last name</span>
+						<input class="input100" type="text" name="lastname" id="lastname" placeholder="Enter last name">
+						<span class="focus-input100"></span>
+					</div>
+
+                    <div class="wrap-input100 validate-input m-b-26" data-validate="Username is required">
+						<span class="label-input100">Email</span>
+						<input class="input100" type="email" name="emailRegister" placeholder="Enter email">
+						<span class="focus-input100"></span>
+					</div>
+
+
 					<div class="wrap-input100 validate-input m-b-18" data-validate = "Password is required">
 						<span class="label-input100">Password</span>
-						<input class="input100" type="password" name="passLogin" id="passLogin" placeholder="Enter password">
+						<input class="input100" type="password" name="passRegister" placeholder="Enter password">
 						<span class="focus-input100"></span>
 					</div>
 
 					<div class="flex-sb-m w-full p-b-30">
-						<div class="contact100-form-checkbox">
-							 <a href="registrujSe.php">Create account!</a>
-							 
-						</div>
-
-						 
+						 <a href="login.php"> I already have an account!</a>
 					</div>
+				<br>
 
 					<div class="container-login100-form-btn">
-						<button class="login100-form-btn" id="login" name="login"> 	Login 	</button>
+						<button class="login100-form-btn" name="register">  	Register 		</button>
 					</div>
 				</form>
 			</div>
@@ -116,6 +133,6 @@
 <!--===============================================================================================-->
 	<script src="vendor/countdowntime/countdowntime.js"></script>
 <!--===============================================================================================-->
- 
+	<script src="js/ulogujSeRegistrujSe.js"></script>
 </body>
 </html>

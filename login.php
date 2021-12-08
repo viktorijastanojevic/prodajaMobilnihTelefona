@@ -13,11 +13,10 @@
 		 
 	 
 		if(mysqli_num_rows($result) > 0){
-		 
-			$row = mysqli_fetch_assoc($result);
-			$_SESSION['currentUser']=$row["id"];
-			echo '<script>alert("Uspesno")</script>';
-			echo  $_SESSION['currentUser'];
+			
+			$row = mysqli_fetch_assoc($result); 
+			
+			echo '<script>alert("USPESNO")</script>';
 			header('Location: index.php');
 		}else{
 			echo '<script>alert("Wrong credentials")</script>';

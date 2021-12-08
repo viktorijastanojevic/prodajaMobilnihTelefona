@@ -28,7 +28,7 @@ class User{
 
     public static function register($user,$conn){
         $query = "insert into user(firstname, lastname,email, password) values('$user->firstname','$user->lastname','$user->email','$user->password') ";
-      echo $query;
+    
         return $conn->query($query);
 
     }
@@ -43,6 +43,7 @@ class User{
                 $myArray[] = $row;
             }
         }
+ 
         return $myArray[0]["id"];
 
     }

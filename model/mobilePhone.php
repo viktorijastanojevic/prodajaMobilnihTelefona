@@ -37,6 +37,19 @@ class Phone{
     
     }
 
+
+    public static function getPhoneById($id, $conn){
+
+        $query= "select * from phone p inner join user u on u.id=p.user where p.phoneID=$id";
+        return $conn->query($query);
+
+
+    }
+
+
+
+
+
 }
 
 ?>

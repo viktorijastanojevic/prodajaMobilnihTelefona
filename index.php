@@ -2,9 +2,11 @@
     include 'dbbroker.php';
     include 'model/mobilePhone.php';
 
-    session_start();
+
+ 
     $result = Phone::getAllPhones($conn);
 
+  
 
    
 
@@ -31,18 +33,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mobile phones</title>
     <link rel="stylesheet" href="css/style.css">
- 
-    <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
-      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
-  
-    
-    <!-- JS, Popper.js, and jQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
    
    <style>
 body {font-family: Arial, Helvetica, sans-serif;}
@@ -89,7 +80,18 @@ body {font-family: Arial, Helvetica, sans-serif;}
   opacity: 1;
 }
 </style>
-
+ 
+<script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+  
+    
+    <!-- JS, Popper.js, and jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 </head>
 <body  style="   background-image: url('images/bg-03.jfif');    background-repeat: no-repeat;   background-attachment: fixed;  background-size: cover;">
      
@@ -127,7 +129,10 @@ body {font-family: Arial, Helvetica, sans-serif;}
                                         <td>  <?php echo $row["description"]   ?> </td>
                                         <td> <?php echo $row["price"]   ?> </td>
                                         <td> <?php echo $row["user"]   ?> </td>
-                                         
+                                        <td> 
+                                                <button type="button" class="btn btn-success" id="btnEdit" data-toggle="modal" data-target=" " ><i class="fas fa-pencil-alt"></i></button> 
+                                                <button type="button" class="btn btn-danger" id="btnDelete" data-toggle="modal" data-target="" ><i class="fas fa-trash"></i></button>  
+                                                <button type="button" class="btn btn-warning" id="btnPreview" data-toggle="modal" data-target="#viewModal" value = "<?php echo $row["phoneID"]   ?>"><i class="far fa-id-card"></i></button>   </td>
                                         </tr>
                                         <tr>
                                  
@@ -136,7 +141,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
 
                             </tbody>
                 </table>
-                <button type="button" class="btn btn-primary" id="btnAddNew" data-toggle="modal" data-target="#addNewModal" >Add new mobile phone</button>                      
+                <button type="button" class="btn btn-primary" id="btnAddNew" data-toggle="modal" data-target="#addNewModal" > <i class="fas fa-plus"></i> Add new mobile phone</button>                      
 
         </div>
 
@@ -166,23 +171,23 @@ body {font-family: Arial, Helvetica, sans-serif;}
  
                             <div class="input-container">
                                 <i class="fa fa-user icon"></i>
-                                <input class="input-field" type="text" placeholder="Model" name="model" id="model">
+                                <input class="input-field" type="text" placeholder="Model" name="model" id="model" required>
                             </div>
 
                             <div class="input-container">
                                 <i class="fa fa-pencil icon"></i>
-                                <input class="input-field" type="text" placeholder="Description" name="description" id="description">
+                                <input class="input-field" type="text" placeholder="Description" name="description" id="description" required>
                             </div>
                             
                             <div class="input-container">
                                 <i class="fa fa-pencil icon"></i>
-                                <input class="input-field" type="text" placeholder="Price" name="price" id="price">
+                                <input class="input-field" type="text" placeholder="Price" name="price" id="price" required>
                             </div>
                             
                        
                             <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary" id="add" name="add">Add</button>
+                            <button type="submit" class="btn btn-primary" id="add" name="add"> <i class="fas fa-plus"></i> Add</button>
                         </div>                   
                     
                         </form>
@@ -194,6 +199,67 @@ body {font-family: Arial, Helvetica, sans-serif;}
                 </div>
             </div>
         </div>
+
+
+
+
+                                    
+        <!-- profile modal start -->
+        <div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="ViewModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Phone <i class="fa fa-mobile" aria-hidden="true"></i></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container" id="profile">
+                            <div class="row">
+                                <div class="col-sm-6 col-md-4">
+                                    <img src="http://placehold.it/100x100" id="Img" alt="" class="rounded responsive" />
+                                </div>
+                                <div class="col-sm-6 col-md-8">
+                                    <h4 id="modelPreview" class="text-primary"></h4>
+                                    <p class="text-secondary">
+                                        <i id="descriptionPreview" class="fa fa-pencil" aria-hidden="true">aaa</i>
+                                        <!-- <i id="Email" class="fa fa-envelope-o" aria-hidden="true"></i> -->
+                                        <br />
+                                        <i id="pricePreview" class="fa fa-tag"  aria-hidden="true"></i>
+                                        <br>
+                                        <i id="userPreview" class="fas fa-user"  aria-hidden="true"></i>
+                                    </p>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- profile modal end -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -216,3 +282,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
     <script src="js/main.js"></script>
 </body> 
 </html>
+
+
+
+ 

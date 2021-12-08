@@ -1,9 +1,11 @@
-$('#add').click(function () {
-    console.log("Dodaj je pokrenuto");
+$('#addform').submit(function () {
+ 
     event.preventDefault();  
     
     const $form = $(this);
+ 
     const $input = $form.find('input,select,button,textarea');
+ 
     const serijalizacija = $form.serialize();  
     console.log(serijalizacija); 
 
@@ -17,16 +19,12 @@ $('#add').click(function () {
     });
 
     request.done(function (response, textStatus, jqXHR) {
-      
-        if (response === "Success") {
-            alert("Poruzbina dodata");
+        
+ 
+            alert("Telefon dodat ");
             console.log("Uspesno dodavanje");
             location.reload(true);
-        }
-        else {
-       
-            console.log("Poruzbina nije dodata" + response);
-        }
+        
     });
 
     request.fail(function (jqXHR, textStatus, errorThrown) {

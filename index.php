@@ -6,9 +6,17 @@
     $result = Phone::getAllPhones($conn);
 
 
-    print_r($result);
+   
 
- 
+    //$p = new Phone(null,"AAA","BBB",10,1 );
+    //Phone::addPhone($p,$conn);
+
+    
+        
+         
+
+
+
 
 
 ?>
@@ -104,7 +112,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
                                 <th scope="col">Description</th>
                                 <th scope="col"><i class="fas fa-euro-sign"></i>  Price</th>
                                 <th scope="col"><i class="fas fa-user"></i>  User</th>
-                                <th scope="col">Image</th>
+                                
                                 <th scope="col">Options</th>
 
                                 </tr>
@@ -119,7 +127,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
                                         <td>  <?php echo $row["description"]   ?> </td>
                                         <td> <?php echo $row["price"]   ?> </td>
                                         <td> <?php echo $row["user"]   ?> </td>
-                                        <td> <?php echo $row["image"]   ?> </td>
+                                         
                                         </tr>
                                         <tr>
                                  
@@ -138,10 +146,9 @@ body {font-family: Arial, Helvetica, sans-serif;}
 
                                                  <!-- MODALI -->
 
+ 
+ 
 
-      
-        
-    
         <!-- Modal za add new telefon -->
         <div class="modal fade" id="addNewModal" tabindex="-1" role="dialog" aria-labelledby="lblAddNewModal" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -155,7 +162,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
 
                         <div class="modal-body">
                               
-                        <form  id="addform" style="max-width:500px;margin:auto" method="POST">
+                        <form  id="addform" style="max-width:500px;margin:auto" method="POST" enctype="multipart/form-data">
  
                             <div class="input-container">
                                 <i class="fa fa-user icon"></i>
@@ -172,28 +179,30 @@ body {font-family: Arial, Helvetica, sans-serif;}
                                 <input class="input-field" type="text" placeholder="Price" name="price" id="price">
                             </div>
                             
-                            <div class="input-container">
-                                <i class="fa fa-picture-o icon"></i>
-                                <input class="input-field" type="file"  name="image" id="image">
-                                
-                            </div>
-
+                       
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary" id="add" name="add">Add</button>
+                        </div>                   
                     
                         </form>
 
 
                         </div>
                         
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary" id="add" name="add">Add</button>
-                        </div>
+                       
                 </div>
             </div>
         </div>
-                            
 
-          
+
+
+
+
+
+
+
+ 
 
 
 

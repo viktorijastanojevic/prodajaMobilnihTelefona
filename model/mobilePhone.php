@@ -6,17 +6,17 @@ class Phone{
     private $description;
     private $price;
     private $user;
-    private $image;
+ 
 
 
 
-    public function __construct($id=null,$model=null,$description=null,$price=null,$user=null, $image=null) 
+    public function __construct($id=null,$model=null,$description=null,$price=null,$user=null ) 
     {
         $this->id=$id;
         $this->model=$model;
         $this->description=$description;
         $this->price=$price;
-        $this->image=$image; 
+       
         $this->user=$user; 
 
     }
@@ -30,8 +30,8 @@ class Phone{
 
     public static function addPhone($phone, $conn){
     
-        $query= "insert into phone(model,description,price,user,image) values('$phone->model','$phone->description',$phone->price,$phone->user,'$phone->image')";
-        print_r($query);
+        $query= "insert into phone(model,description,price,user ) values('$phone->model','$phone->description',$phone->price,$phone->user )";
+
         return $conn->query($query);
         
     

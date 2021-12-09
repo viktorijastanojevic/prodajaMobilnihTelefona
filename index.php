@@ -133,7 +133,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
                                             <form  method="post">
                                                 <button type="button" class="btn btn-success"    data-toggle="modal" data-target="#updateModal" onclick="getDetailsUpdateModal(<?php echo $row['phoneID']?> )" >  <i class="fas fa-pencil-alt"></i> </button> 
                                                 <button type="button" class="btn btn-danger"   onclick="deletePhone( <?php echo $row['phoneID']   ?>  )" ><i class="fas fa-trash"></i></button>  
-                                                <button type="button" class="btn btn-warning"   data-toggle="modal" data-target="#viewModal" value = "<?php echo $row["phoneID"]   ?>"><i class="far fa-id-card"></i></button>   </td>
+                                                <button type="button" class="btn btn-warning"   data-toggle="modal" data-target="#viewModal"  onclick="getDetailsPreviewModal(<?php echo $row['phoneID']?> )"><i class="far fa-id-card"></i></button>   </td>
                                                 </form>
                                             </tr>
                                         <tr>
@@ -251,8 +251,8 @@ body {font-family: Arial, Helvetica, sans-serif;}
                 </div>
             </div>
         </div>
-
-
+       
+                                    
 
 
 
@@ -295,8 +295,8 @@ body {font-family: Arial, Helvetica, sans-serif;}
                                 <div class="col-sm-6 col-md-8">
                                     <h4 id="modelPreview" class="text-primary"></h4>
                                     <p class="text-secondary">
-                                        <input type="hidden" name="phoneid" id="phoneid" value="">
-                                        <i id="descriptionPreview" class="fa fa-pencil" aria-hidden="true">aaa</i>
+                                        <input type="hidden" name="hiddenData"   value="">
+                                        <i id="descriptionPreview" class="fa fa-pencil" aria-hidden="true"> </i>
                                         <!-- <i id="Email" class="fa fa-envelope-o" aria-hidden="true"></i> -->
                                         <br />
                                         <i id="pricePreview" class="fa fa-tag"  aria-hidden="true"></i>

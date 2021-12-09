@@ -130,10 +130,12 @@ body {font-family: Arial, Helvetica, sans-serif;}
                                         <td> <?php echo $row["price"]   ?> </td>
                                         <td> <?php echo $row["user"]   ?> </td>
                                         <td> 
-                                                <button type="button" class="btn btn-success" id="btnEdit" data-toggle="modal" data-target=" " ><i class="fas fa-pencil-alt"></i></button> 
-                                                <button type="button" class="btn btn-danger" id="btnDelete" data-toggle="modal" data-target="" ><i class="fas fa-trash"></i></button>  
-                                                <button type="button" class="btn btn-warning" id="btnPreview" data-toggle="modal" data-target="#viewModal" value = "<?php echo $row["phoneID"]   ?>"><i class="far fa-id-card"></i></button>   </td>
-                                        </tr>
+                                            <form  method="post">
+                                                <button type="button" class="btn btn-success"    data-toggle="modal" data-target="#updateModal" onclick="getDetailsUpdateModal(<?php echo $row['phoneID']?> )" >  <i class="fas fa-pencil-alt"></i> </button> 
+                                                <button type="button" class="btn btn-danger"   onclick="deletePhone( <?php echo $row['phoneID']   ?>  )" ><i class="fas fa-trash"></i></button>  
+                                                <button type="button" class="btn btn-warning"   data-toggle="modal" data-target="#viewModal" value = "<?php echo $row["phoneID"]   ?>"><i class="far fa-id-card"></i></button>   </td>
+                                                </form>
+                                            </tr>
                                         <tr>
                                  
                                 <?php    endwhile  ?>
@@ -203,6 +205,75 @@ body {font-family: Arial, Helvetica, sans-serif;}
 
 
 
+ <!-- Modal za update   telefon -->
+        <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="lblUpdateModal" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="titleUpdate">Update mobile phone</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+
+                        <div class="modal-body">
+                              
+                        <form  id="updateform" style="max-width:500px;margin:auto" method="POST" enctype="multipart/form-data">
+ 
+                            <div class="input-container">
+                                <i class="fa fa-user icon"></i>
+                                <input class="input-field" type="text" placeholder="Model" name="modelupdate" id="modelupdate" required>
+                            </div>
+
+                            <div class="input-container">
+                                <i class="fa fa-pencil icon"></i>
+                                <input class="input-field" type="text" placeholder="Description" name="descriptionupdate" id="descriptionupdate" required>
+                            </div>
+                            
+                            <div class="input-container">
+                                <i class="fa fa-pencil icon"></i>
+                                <input class="input-field" type="text" placeholder="Price" name="priceupdate" id="priceupdate" required>
+                            </div>
+                            <input  class="input-field" type="text" id="hiddenData" name ="hiddenData">
+                       
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary" id="update" name="update"  >  Update</button>
+                            
+                        </div>                   
+                    
+                        </form>
+
+
+                        </div>
+                        
+                       
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                                     
         <!-- profile modal start -->
         <div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="ViewModalLabel"
@@ -224,6 +295,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
                                 <div class="col-sm-6 col-md-8">
                                     <h4 id="modelPreview" class="text-primary"></h4>
                                     <p class="text-secondary">
+                                        <input type="hidden" name="phoneid" id="phoneid" value="">
                                         <i id="descriptionPreview" class="fa fa-pencil" aria-hidden="true">aaa</i>
                                         <!-- <i id="Email" class="fa fa-envelope-o" aria-hidden="true"></i> -->
                                         <br />
@@ -274,9 +346,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
 
 
 
-
-
-
+ 
 
    
     <script src="js/main.js"></script>

@@ -15,7 +15,7 @@ require 'model/user.php';
 		if ($result){
 			echo '<script>alert("Uspesno")</script>';
 			 
-			 
+			 header('Location: login.php');
 			 
 		}else{
 			echo '<script>alert("Neuspesna registracija")</script>';

@@ -36,7 +36,7 @@ class User{
     public static function getIdByEmail($user,$conn){
         $query = "  select * from user where email='$user->email' ";
         $myArray = array();
-       $result= $conn->query($query);
+        $result= $conn->query($query);
         if($result){
             while($row = $result->fetch_array()){
 
@@ -47,6 +47,25 @@ class User{
         return $myArray[0]["id"];
 
     }
+
+
+    
+    public static function getUserById($id,$conn){
+        $query = "select * from user where id=$id";
+        $myArray = array();
+        $result= $conn->query($query);
+        if($result){
+            while($row = $result->fetch_array()){
+
+                $myArray[] = $row;
+            }
+        }
+        return  $myArray[0]["firstname"]  . " " . $myArray[0]["lastname"] ;
+
+    }
+
+
+
 
 }
 

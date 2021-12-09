@@ -1,6 +1,8 @@
 <?php 
     include 'dbbroker.php';
     include 'model/mobilePhone.php';
+    include 'model/user.php';
+ 
 
 
  
@@ -40,7 +42,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
 * {box-sizing: border-box;}
 
 .input-container {
-  display: -ms-flexbox; /* IE10 */
+  display: -ms-flexbox; 
   display: flex;
   width: 100%;
   margin-bottom: 15px;
@@ -95,8 +97,19 @@ body {font-family: Arial, Helvetica, sans-serif;}
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 </head>
 <body  style="   background-image: url('images/bg-03.jfif');    background-repeat: no-repeat;   background-attachment: fixed;  background-size: cover;">
-     
-
+                
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand" href="#">Welcome!</a>
+                 
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav" style="padding-left:95%" >
+                    
+                        <li class="nav-item  ">
+                            <a class="nav-link" href="logout.php" >Log out  </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
      
     
 
@@ -124,14 +137,17 @@ body {font-family: Arial, Helvetica, sans-serif;}
                             </thead>
                             <tbody>
                                 <?php    while($row = $result->fetch_array()):  ?>
-
+                                    <?php  
+                                        $user =    User::getUserById($row["user"],$conn) ;
+                                     
+                                        ?>
                            
                                         <tr>
                                         <th scope="row">  <?php echo $row["phoneID"]   ?>    </th>
                                         <td> <?php echo $row["model"]   ?> </td>
                                         <td>  <?php echo $row["description"]   ?> </td>
                                         <td> <?php echo $row["price"]   ?> </td>
-                                        <td> <?php echo $row["user"]   ?> </td>
+                                        <td> <?php echo $user    ?> </td>
                                         <td> 
                                             <form  method="post">
                                                 <button type="button" class="btn btn-success"    data-toggle="modal" data-target="#updateModal" onclick="getDetailsUpdateModal(<?php echo $row['phoneID']?> )" >  <i class="fas fa-pencil-alt"></i> </button> 

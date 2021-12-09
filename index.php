@@ -81,7 +81,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
 }
 </style>
  <script src="js/vote.js"></script>
- <script src="js/searchandsort.js"></script>
+
 <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
@@ -139,14 +139,15 @@ body {font-family: Arial, Helvetica, sans-serif;}
                                                 <button type="button" class="btn btn-warning"   data-toggle="modal" data-target="#viewModal"  onclick="getDetailsPreviewModal(<?php echo $row['phoneID']?> )"><i class="far fa-id-card"></i></button>   </td>
                                                 </form>
                                             </tr>
-                                        <tr>
+                                       
                                  
                                 <?php    endwhile  ?>
 
 
                             </tbody>
                 </table>
-                <button type="button" class="btn btn-primary" id="btnAddNew" data-toggle="modal" data-target="#addNewModal" > <i class="fas fa-plus"></i> Add new mobile phone</button>                      
+                <button type="button" class="btn btn-primary" id="btnAddNew" data-toggle="modal" data-target="#addNewModal" > <i class="fas fa-plus"></i> Add new mobile phone</button>   
+                <button type="button" class="btn btn-secondary" id="sortTable"  onclick="sortTable()"  ><i class="fa fa-sort" aria-hidden="true"></i>  Sort table by name descending</button>                    
 
         </div>
 
@@ -401,7 +402,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
 
  
 
-   
+        <script src="js/searchandsort.js"></script>
     <script src="js/main.js"></script>
 </body> 
 </html>

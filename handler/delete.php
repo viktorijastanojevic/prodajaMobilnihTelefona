@@ -1,7 +1,7 @@
 <?php
         include '../dbbroker.php';
 
-        include '../index.php';
+        include '../home.php';
 
         if(isset($_POST['deletesend'])){
                $result= Phone::deletePhone($_POST['deletesend'],$conn);

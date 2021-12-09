@@ -4,10 +4,10 @@
 
 
  
-    $result = Phone::getAllPhones($conn);
+    $result = Phone::getAllPhones($conn); //za tabelu
 
   
-
+    $result1 = Phone::getAllPhones($conn); //za poll
    
 
     //$p = new Phone(null,"AAA","BBB",10,1 );
@@ -80,7 +80,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
   opacity: 1;
 }
 </style>
- 
+ <script src="js/vote.js"></script>
 <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
@@ -99,7 +99,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
      
     
 
-        <div class="mainPart" style="background-color: 	rgb(208,208,208,0.9) ;   border-radius: 5px; padding:30px; margin:20%" >
+        <div class="mainPart" style="background-color: 	rgb(208,208,208,0.9) ;   border-radius: 5px; padding:30px; margin:10%" >
 
                         <h2><i class="fa fa-mobile" aria-hidden="true"></i> Mobile phones</h2>
 
@@ -146,6 +146,56 @@ body {font-family: Arial, Helvetica, sans-serif;}
                 <button type="button" class="btn btn-primary" id="btnAddNew" data-toggle="modal" data-target="#addNewModal" > <i class="fas fa-plus"></i> Add new mobile phone</button>                      
 
         </div>
+
+
+
+
+        <div class="mainPart" style="background-color: 	rgb(208,208,208,0.9) ;   border-radius: 5px; padding:30px; margin:10%" >
+
+             <h2><i class="fa fa-mobile" aria-hidden="true"></i>   Which is the best mobile phone?</h2>
+
+
+                
+
+                
+                    <div class="container" style="background-color: rgb(208,208,208,0.9);">
+                    <?php
+                    
+                    
+                   
+                    while($row = mysqli_fetch_array($result1)) {
+                        ?>
+                        <button name="vote" onclick="countvalue(this.value)" value="<?php echo $row['phoneID']; ?>"  class="btn btn-warning">
+                            <?php echo '<b>'.$row['model'].'</b>'; ?>
+                        </button>
+                        <?php
+                    }
+                    ?>
+                    <br><br>
+                    <div id="showvotebar" style="background-color: 	rgb(208,208,208,0.9)">
+                        <?php 
+                        $data = array('progress-bar-danger', 'progress-bar-warning', 'progress-bar-info','progress-bar-danger', 'progress-bar-warning', 'progress-bar-info','progress-bar-danger', 'progress-bar-warning', 'progress-bar-info','progress-bar-danger', 'progress-bar-warning', 'progress-bar-info','progress-bar-danger', 'progress-bar-warning', 'progress-bar-info','progress-bar-danger', 'progress-bar-warning', 'progress-bar-info');
+                        $total =0;
+                        $result= Phone::getAllPhones($conn);
+                        while($row = mysqli_fetch_array($result)){
+                            $total = $total + $row[5];
+                        } 
+                        $i = 0;
+                        $result= Phone::getAllPhones($conn);
+                        while($row = mysqli_fetch_array($result)){ 
+                            $percentage = ($row[5] / $total) * 100;
+                            echo '<div class="progress" style="height:35px" > ';
+                            echo '<div class="progress-bar '.$data[$i].'" role="progressbar" aria-valuenow="'.$percentage.'" aria-valuemin="0" aria-valuemax="100" style="font-size:20px;width:'.$percentage.'%">';
+                            echo $row[1].'('.round($percentage).')';
+                            echo '</div>';
+                            echo '</div>';
+                            echo '<br>';
+                            $i++;
+                        }
+                        ?>
+                    </div>
+         
+            </div>
 
 
 

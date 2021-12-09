@@ -290,7 +290,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
                         <div class="container" id="profile">
                             <div class="row">
                                 <div class="col-sm-6 col-md-4">
-                                    <img src="http://placehold.it/100x100" id="Img" alt="" class="rounded responsive" />
+                                    <img src="http://placehold.it/100x100" id="Img" alt="" class="rounded responsive" style="width: 100px;height: auto;" />
                                 </div>
                                 <div class="col-sm-6 col-md-8">
                                     <h4 id="modelPreview" class="text-primary"></h4>

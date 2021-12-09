@@ -106,7 +106,41 @@ function deletePhone( deleteid){
     });
 }
 
+function getDetailsPreviewModal(previewid){
+    $('#hiddenData').val(previewid);  //postavljamo vrednost skrivenog polja da bude id od telefona koji treba da azuriramo 
 
+    $.post("handler/get.php",{previewid:previewid},function(data,status){
+ 
+        var phoneid=JSON.parse(data);//uzimamo podatke i parsisamo ih u JSON
+        console.log(phoneid);        //uzimamo podatke iz baze i cuvamo ih u input field
+        console.log(phoneid.model);
+        $('#userPreview').text("   " + phoneid.firstname);
+        $('#modelPreview').text("   " + phoneid.model);
+        $('#descriptionPreview').text("   " +  phoneid.description);
+        $('#pricePreview').text("   " +  phoneid.price);
+
+
+        if (phoneid.model.toUpperCase().includes("APPLE") || phoneid.model.toUpperCase().includes("IPHONE") ) {
+            document.getElementById("Img").src = 'images/apple.png';
+        } else if (phoneid.model.toUpperCase().includes("SAMSUNG")) {
+            document.getElementById("Img").src = 'images/samsung.png';
+        } else if (phoneid.model.toUpperCase().includes("NOKIA")) {
+            document.getElementById("Img").src = 'images/nokia.png';
+        }else if (phoneid.model.toUpperCase().includes("LENOVO")) {
+            document.getElementById("Img").src = 'images/lenovo.png';
+        }else if (phoneid.model.toUpperCase().includes("XIAOMI")) {
+            document.getElementById("Img").src = 'images/xiaomi.png';
+        }else if (phoneid.model.toUpperCase().includes("HUAWEI")) {
+            document.getElementById("Img").src = 'images/huawei.png';
+        }
+        else {
+            document.getElementById("Img").src = 'http://placehold.it/100x100';
+        }
+
+
+
+    });
+}
 
 function getDetailsUpdateModal(updateid){
     $('#hiddenData').val(updateid);  //postavljamo vrednost skrivenog polja da bude id od telefona koji treba da azuriramo 
@@ -141,21 +175,18 @@ function getDetailsUpdateModal(updateid){
 
 }*/
 $('#updateform').submit(function () {
-    alert("BB");
+ 
     event.preventDefault();
 
     const $form =  $(this);
-    console.log($form);
-    alert("VV");
+ 
     const $inputs = $form.find('input, select, button, textarea');
-    console.log($inputs);
-    alert("BB");
+ 
     const serializedData = $form.serialize();
-    console.log("AA " +serializedData);
-    alert("BB");
+ 
     $inputs.prop('disabled', true);
 
-    // kreirati request za UPDATE handler
+ 
     request = $.ajax({
         url: 'handler/update.php',
         type: 'post',
@@ -163,8 +194,7 @@ $('#updateform').submit(function () {
     })
 
     request.done(function (response, textStatus, jqXHR) {
-        console.log(response);
-        alert("BB");
+ 
         $('#updateModal').modal('hide');
         location.reload(true);
         $('#updateform').reset;
